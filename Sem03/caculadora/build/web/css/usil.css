@@ -1,0 +1,21 @@
+body{
+    background-color: #2E2E2E;
+    color: white;
+    font-family: 14px;
+}
+
+.usil_pagina{
+    background-color: white;
+    color: #0000FF;
+    width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+}
+h1{
+    color: red;
+}
+fieldset{
+    background-color: #00FF00;
+    color: #000000;
+}
+

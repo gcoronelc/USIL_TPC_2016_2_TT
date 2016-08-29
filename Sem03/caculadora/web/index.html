@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/usil.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="usil_pagina">
+      <img src="img/CALCULADORA.png" alt=""/>
+      <h1>CALCULADORA</h1>
+      <form method="post" action="CALCULARServlet">
+        <fieldset>
+          <legend>DATOS</legend>
+          <table>
+            <tr>
+              <td>OPERADOR :</td>
+              <td>
+                <select name="operacion">
+                  <option value="S">SUMA</option>
+                  <option value="R">RESTA</option>
+                  <option value="M">MULTIPLICACION</option> 
+                  <option value="D">DIVISION</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>NUMERO 1:</td>
+              <td><input type="text" name="num1"/></td>
+            </tr>
+            <tr>
+              <td>NUMERO 2 :</td>
+              <td><input type="text" name="num2"/></td>
+            </tr>
+          </table>
+          <input type="submit" name="CALCULAR" value="Procesar"/>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>
