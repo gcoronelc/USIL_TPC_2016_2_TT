@@ -1,4 +1,4 @@
 Desarrollar una aplicación para
 calcular el importe de una venta
-utilizando solamente JSP y
-el concepto de Capa Service.
+utilizando solamente JSP, Servlet 
+y el concepto de Capa Service.
