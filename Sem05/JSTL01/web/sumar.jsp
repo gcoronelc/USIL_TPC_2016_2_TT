@@ -2,8 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Datos -->
-<c:set var="n1" value="${param.n1}" scope="page"/>
-<c:set var="n2" value="${param.n2}" scope="page"/>
+<c:set var="n1" value="${param.a}" scope="page"/>
+<c:set var="n2" value="${param.b}" scope="page"/>
 
 <!-- Proceso -->
 <c:set var="suma" value="${n1 + n2}"/>
