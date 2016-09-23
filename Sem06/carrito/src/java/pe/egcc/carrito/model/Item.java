@@ -16,6 +16,12 @@ public class Item {
   public Item() {
   }
 
+  public Item(String nombre, double precio, int cant) {
+    this.nombre = nombre;
+    this.precio = precio;
+    this.cant = cant;
+  }
+
   public String getNombre() {
     return nombre;
   }
@@ -48,4 +54,11 @@ public class Item {
     this.importe = importe;
   }
 
+  @Override
+  public String toString() {
+    String texto = nombre + " | " + precio + " | "
+            + cant + " | " + importe;
+    return texto;
+  }
+ 
 }

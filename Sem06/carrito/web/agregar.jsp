@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,16 @@
       <section class="egcc_content">
 
         <h1>AGREGAR ITEM</h1>
-        <form>
+        
+        <c:if test="${requestScope.mensaje != null}" >
+          <p class="egcc_mensaje">${requestScope.mensaje}</p>
+        </c:if>
+          
+        <c:if test="${requestScope.error != null}" >
+          <p class="egcc_error">${requestScope.mensaje}</p>
+        </c:if>
+        
+        <form method="post" action="AddItem">
           <fieldset style="width: 40%;">
             <legend>Datos del item</legend>
             <table>
