@@ -1,6 +1,5 @@
 package pe.egcc.proyecto2.service;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
 import pe.egcc.proyecto2.model.Item;
@@ -18,6 +17,8 @@ public class NavegandoService {
     determinarConsumo(repo, consumo);
     calcularImportes(repo);
     repo = depurar(repo);
+    agregarDescripcion(repo);
+    agregarTotal(repo);
     return repo;
   } 
 
@@ -57,6 +58,30 @@ public class NavegandoService {
       }
     }
     return repo2;
+  }
+
+  private void agregarDescripcion(List<Item> repo) {
+    for (Item item : repo) {
+      String texto;
+      texto = "Tramo " + item.getTramo() +
+              " consumo " + item.getConsumo() 
+              + " GB";
+      item.setDescripcion(texto);
+    }
+  }
+
+  private void agregarTotal(List<Item> repo) {
+    double consumo = 0.0;
+    double total = 0.0;
+    for (Item item : repo) {
+      consumo += item.getConsumo();
+      total += item.getImporte();
+    }
+    Item bean = new Item();
+    bean.setDescripcion("Totales");
+    bean.setConsumo(consumo);
+    bean.setImporte(total);
+    repo.add(bean);
   }
   
   

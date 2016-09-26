@@ -14,7 +14,7 @@ public class Prueba01 {
   
   public static void main(String[] args) {
     // Dato
-    double consumo = 10.50;
+    double consumo = 14.80;
     // Procesar
     NavegandoService service = new NavegandoService();
     List<Item> repo = service.procesar(consumo);
