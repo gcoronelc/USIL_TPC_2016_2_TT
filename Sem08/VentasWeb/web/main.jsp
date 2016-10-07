@@ -13,7 +13,7 @@
         <jsp:include page="header.jsp" />
       </header>
       <section class="egcc_menu">
-        <jsp:include page="menu.jsp" />
+        Falta el menu
       </section>
       <section class="egcc_content">
         <h1>DATOS DEL CURSO</h1>

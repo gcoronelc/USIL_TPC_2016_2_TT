@@ -21,7 +21,8 @@
         <img src="img/logo.jpg" />
       </div>
       <h1>INICIO DE SESION</h1>
-      <form method="post" action="">
+      <p>${requestScope.error}</p>
+      <form method="post" action="LogonIngresar">
         <table>
           <tr>
             <td rowspan="2"><img src="img/userLogin.png" /></td>
