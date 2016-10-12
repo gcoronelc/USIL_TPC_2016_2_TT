@@ -15,8 +15,8 @@ public class EmpleadoMapper
     bean.setIdemp(rs.getInt("idemp"));
     bean.setApellido(rs.getString("apellido"));
     bean.setNombre(rs.getString("nombre"));
-    bean.setTelefono(rs.getString("email"));
-    bean.setEmail(rs.getString("telefono"));
+    bean.setTelefono(rs.getString("telefono"));
+    bean.setEmail(rs.getString("email"));
     return bean;
   }
   

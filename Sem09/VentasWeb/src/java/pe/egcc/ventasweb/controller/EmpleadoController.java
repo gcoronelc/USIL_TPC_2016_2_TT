@@ -1,7 +1,6 @@
 package pe.egcc.ventasweb.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,17 +17,30 @@ import pe.egcc.ventasweb.service.impl.EmpleadoServiceImpl;
  * @blog www.desarrollasoftware.com
  * @email egcc.usil@gmail.com
  */
-@WebServlet(name = "EmpleadoController", 
-        urlPatterns = {"/EmpleadoConsultar", "/EmpleadoLeerPorId"})
+@WebServlet(name = "EmpleadoController",
+        urlPatterns = {"/EmpleadoConsultar",
+          "/EmpleadoEditar", "/EmpleadoEliminar",
+          "/EmpleadoLeerPorId"})
 public class EmpleadoController extends HttpServlet {
 
   @Override
-  protected void service(HttpServletRequest request, 
+  protected void service(HttpServletRequest request,
           HttpServletResponse response) throws ServletException, IOException {
-    switch(request.getServletPath()){
+    switch (request.getServletPath()) {
       case "/EmpleadoConsultar":
-        consultar(request,response);
+        if (request.getParameter("btnConsultar") != null) {
+          consultar(request, response);
+        } else if (request.getParameter("btnNuevo") != null) {
+          nuevo(request, response);
+        }
         break;
+      case "/EmpleadoEditar":
+        editar(request, response);
+        break;
+      case "/EmpleadoEliminar":
+        eliminar(request, response);
+        break;
+
     }
   } // Fin de service
 
@@ -47,6 +59,41 @@ public class EmpleadoController extends HttpServlet {
     UtilController.forward(request, response, "mantEmpleados.jsp");
   }
 
-  
-  
+  private void nuevo(HttpServletRequest request,
+          HttpServletResponse response)
+          throws ServletException, IOException {
+    // Variables
+    Empleado bean = new Empleado();
+    // Datos para la página
+    request.setAttribute("accion", UtilController.CRUD_NUEVO);
+    request.setAttribute("bean", bean);
+    UtilController.forward(request, response, "editarEmpleado.jsp");
+  } // Fin de nuevo
+
+  private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Parámetro
+    int id = Integer.parseInt(request.getParameter("id"));
+    // Recuperar datos del empleado
+    EmpleadoServiceEspec service;
+    service = new EmpleadoServiceImpl();
+    Empleado bean = service.leer(id);
+    // Datos de la página
+    request.setAttribute("bean", bean);
+    request.setAttribute("accion", UtilController.CRUD_EDITAR);
+    UtilController.forward(request, response, "editarEmpleado.jsp");
+  }
+
+  private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Parámetro
+    int id = Integer.parseInt(request.getParameter("id"));
+    // Recuperar datos del empleado
+    EmpleadoServiceEspec service;
+    service = new EmpleadoServiceImpl();
+    Empleado bean = service.leer(id);
+    // Datos de la página
+    request.setAttribute("bean", bean);
+    request.setAttribute("accion", UtilController.CRUD_ELIMIAR);
+    UtilController.forward(request, response, "editarEmpleado.jsp");
+  }
+
 } // Fin de EmpleadoController
