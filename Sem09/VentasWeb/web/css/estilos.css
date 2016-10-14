@@ -56,4 +56,14 @@ h1{
   color: #0A2A12;
 }
 
+.egcc_error{
+  padding: 15px;
+  background-color: #FFE4E1;
+  color: #008080;
+}
 
+.egcc_mensaje{
+  padding: 15px;
+  background-color: #DCDCDC;
+  color: #008080;
+}

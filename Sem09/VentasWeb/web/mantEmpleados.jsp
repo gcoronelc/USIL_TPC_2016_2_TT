@@ -21,6 +21,10 @@
 
         <h1>MANTENIMIENTO DE EMPLEADOS</h1>
 
+        <c:if test="${requestScope.mensaje != null}">
+          <p class="egcc_mensaje">${requestScope.mensaje}</p>
+        </c:if>
+
         <form method="post" action="EmpleadoConsultar">
           <fieldset>
             <legend>Datos</legend>
@@ -62,8 +66,8 @@
                 <td>${r.email}</td>
                 <td>${r.telefono}</td>
                 <td style="text-align: center;">
-                  <a href="EmpleadoEditar?id=${r.idemp}" title="Editar"><img src="img/editar.png" /></a>
-                  <a href="EmpleadoEliminar?id=${r.idemp}" title="Eliminar"><img src="img/tacho.png" /></a>
+                  <a href="EmpleadoEditar?id=${r.idemp}" title="Editar ${r.idemp}"><img src="img/editar.png" /></a>
+                  <a href="EmpleadoEliminar?id=${r.idemp}" title="Eliminar ${r.idemp}"><img src="img/tacho.png" /></a>
                 </td>
               </tr>
             </c:forEach>

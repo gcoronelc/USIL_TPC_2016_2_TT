@@ -25,7 +25,9 @@ public class EmpleadoServiceImpl
   private final String SQL_INSERT = "insert into empleado "
           + "(nombre, apellido, email, telefono) "
           + "values(?, ?, ?, ?) ";
-  private final String SQL_UPDATE = "UPDATE ";
+  private final String SQL_UPDATE = "UPDATE empleado "
+          + "SET nombre=?, apellido=?, email=?, telefono=? "
+          + "WHERE idemp=?";
   private final String SQL_DELETE = "DELETE ";
 
   @Override
@@ -69,12 +71,74 @@ public class EmpleadoServiceImpl
 
   @Override
   public void crear(Empleado bean) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  Connection cn = null;
+    try {
+      cn = AccesoDB.getConnection();
+      cn.setAutoCommit(false);
+      // Insertar Registro
+      PreparedStatement pstm;
+      pstm = cn.prepareStatement(SQL_INSERT);
+      pstm.setString(1, bean.getNombre());
+      pstm.setString(2, bean.getApellido());
+      pstm.setString(3, bean.getEmail());
+      pstm.setString(4, bean.getTelefono());
+      pstm.executeUpdate();
+      pstm.close();
+      // Recuperar id
+      String sql = "select LAST_INSERT_ID() id";
+      pstm = cn.prepareStatement(sql);
+      ResultSet rs = pstm.executeQuery();
+      rs.next();
+      int id = rs.getInt("id");
+      bean.setIdemp(id);
+      rs.close();
+      pstm.close();
+      cn.commit();
+    } catch (Exception e) {
+      try {
+        cn.rollback();
+      } catch (Exception e1) {
+      }
+      throw new RuntimeException("Error en el proceso. " + e.getMessage());
+    } finally{
+      try {
+        cn.close();
+      } catch (Exception e) {
+      }
+    }
   }
 
   @Override
   public void modificar(Empleado bean) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Connection cn = null;
+    try {
+      cn = AccesoDB.getConnection();
+      cn.setAutoCommit(false);
+      PreparedStatement pstm;
+      pstm = cn.prepareStatement(SQL_UPDATE);
+      pstm.setString(1, bean.getNombre());
+      pstm.setString(2, bean.getApellido());
+      pstm.setString(3, bean.getEmail());
+      pstm.setString(4, bean.getTelefono());
+      pstm.setInt(5, bean.getIdemp());
+      int filas = pstm.executeUpdate();
+      pstm.close();
+      if(filas != 1){
+        throw new Exception("Error, datos incorrectos.");
+      }
+      cn.commit();
+    } catch (Exception e) {
+      try {
+        cn.rollback();
+      } catch (Exception e1) {
+      }
+      throw new RuntimeException("Error en el proceso. " + e.getMessage());
+    } finally{
+      try {
+        cn.close();
+      } catch (Exception e) {
+      }
+    }
   }
 
   @Override

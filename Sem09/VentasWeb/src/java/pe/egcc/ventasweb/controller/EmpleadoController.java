@@ -20,7 +20,7 @@ import pe.egcc.ventasweb.service.impl.EmpleadoServiceImpl;
 @WebServlet(name = "EmpleadoController",
         urlPatterns = {"/EmpleadoConsultar",
           "/EmpleadoEditar", "/EmpleadoEliminar",
-          "/EmpleadoLeerPorId"})
+          "/EmpleadoGrabar"})
 public class EmpleadoController extends HttpServlet {
 
   @Override
@@ -40,7 +40,9 @@ public class EmpleadoController extends HttpServlet {
       case "/EmpleadoEliminar":
         eliminar(request, response);
         break;
-
+      case "/EmpleadoGrabar":
+        grabar(request, response);
+        break;
     }
   } // Fin de service
 
@@ -95,5 +97,47 @@ public class EmpleadoController extends HttpServlet {
     request.setAttribute("accion", UtilController.CRUD_ELIMIAR);
     UtilController.forward(request, response, "editarEmpleado.jsp");
   }
+
+  private void grabar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    Empleado bean = new Empleado();
+    String destino;
+    String accion = "";
+    try {
+      // Datos
+      accion = request.getParameter("accion");
+      bean.setIdemp(Integer.parseInt(request.getParameter("idemp")));
+      bean.setApellido(request.getParameter("apellido"));
+      bean.setNombre(request.getParameter("nombre"));
+      bean.setTelefono(request.getParameter("telefono"));
+      bean.setEmail(request.getParameter("email"));
+      // Proceso
+      EmpleadoServiceEspec service;
+      service = new EmpleadoServiceImpl();
+      String mensaje = "";
+      switch(accion){
+        case UtilController.CRUD_NUEVO:
+          service.crear(bean);
+          mensaje = "Empleado se ha registrado correctamente (id="+ bean.getIdemp() + ").";
+          break;
+        case UtilController.CRUD_EDITAR:
+          service.modificar(bean);
+          mensaje = "Empleado se ha actualizado correctamente.";
+          break;
+        case UtilController.CRUD_ELIMIAR:
+          service.eliminar(bean.getIdemp());
+          mensaje = "Empleado se ha eliminado correctamente.";
+          break;
+      }
+      request.setAttribute("mensaje", mensaje);
+      destino = "mantEmpleados.jsp";
+    } catch (Exception e) {
+      request.setAttribute("error", e.getMessage());
+      request.setAttribute("bean", bean);
+      request.setAttribute("accion", accion);
+      destino = "editarEmpleado.jsp";
+    }
+    // Forward
+    UtilController.forward(request, response, destino);
+  } // Fin de grabar
 
 } // Fin de EmpleadoController

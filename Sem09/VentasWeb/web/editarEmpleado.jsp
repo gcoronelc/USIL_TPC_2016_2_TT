@@ -17,35 +17,71 @@
         <jsp:include page="menu/menu.jsp" />
       </section>
       <section class="egcc_content">
-        <h1>${requestScope.accion} EMPLEADO</h1>
-        
-        <table>
-          <tr>
-            <td>ID</td>
-            <td>${requestScope.bean.idemp}</td>
-          </tr>
-          <tr>
-            <td>NOMBRE</td>
-            <td><input type="text" name="nombre"
-                       value="${requestScope.bean.nombre}"/></td>
-          </tr>
-          <tr>
-            <td>APELLIDO</td>
-            <td><input type="text" name="apellido"
-                       value="${requestScope.bean.apellido}"/></td>
-          </tr>
-          <tr>
-            <td>TELEFONO</td>
-            <td><input type="text" name="telefono"
-                       value="${requestScope.bean.telefono}"/></td>
-          </tr>
-          <tr>
-            <td>EMAIL</td>
-            <td><input type="text" name="email"
-                       value="${requestScope.bean.email}"/></td>
-          </tr>
-        </table>
-        
+
+        <form method="post" action="EmpleadoGrabar">
+
+          <h1>${requestScope.accion} EMPLEADO</h1>
+          
+          <c:if test="${requestScope.error != null}">
+            <p class="egcc_error">${requestScope.error}</p>
+          </c:if>
+          
+          <input type="hidden" name="accion" value="${requestScope.accion}" />
+          <input type="hidden" name="idemp" value="${requestScope.bean.idemp}" />
+
+          <table>
+            <tr>
+              <td width="120px">ID</td>
+              <td>${requestScope.bean.idemp}</td>
+            </tr>
+            <tr>
+              <td>NOMBRE</td>
+              <td>
+                <c:if test='${requestScope.accion ne "ELIMINAR"}'>
+                  <input  type="text" name="nombre"value="${requestScope.bean.nombre}"/>
+                </c:if>
+                <c:if test='${requestScope.accion eq "ELIMINAR"}'>
+                  ${requestScope.bean.nombre}
+                </c:if>
+              </td>
+            </tr>
+            <tr>
+              <td>APELLIDO</td>
+              <td>
+                <c:if test='${requestScope.accion ne "ELIMINAR"}'>
+                  <input type="text" name="apellido"value="${requestScope.bean.apellido}"/>
+                </c:if>
+                <c:if test='${requestScope.accion eq "ELIMINAR"}'>
+                  ${requestScope.bean.apellido}
+                </c:if>
+              </td>
+            </tr>
+            <tr>
+              <td>TELEFONO</td>
+              <td>
+                <c:if test='${requestScope.accion ne "ELIMINAR"}'>
+                  <input type="text" name="telefono"value="${requestScope.bean.telefono}"/>
+                </c:if>
+                <c:if test='${requestScope.accion eq "ELIMINAR"}'>
+                  ${requestScope.bean.telefono}
+                </c:if>
+              </td>
+            </tr>
+            <tr>
+              <td>EMAIL</td>
+              <td>
+                <c:if test='${requestScope.accion ne "ELIMINAR"}'>
+                  <input type="text" name="email"value="${requestScope.bean.email}"/>
+                </c:if>
+                <c:if test='${requestScope.accion eq "ELIMINAR"}'>
+                  ${requestScope.bean.email}
+                </c:if>
+              </td>
+            </tr>
+          </table>
+
+            <input type="submit" value="Procesar" />
+        </form>
       </section>
       <footer class="egcc_pie">
         <jsp:include page="pie.jsp" />
