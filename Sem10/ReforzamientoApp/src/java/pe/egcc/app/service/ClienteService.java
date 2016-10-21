@@ -122,7 +122,7 @@ public class ClienteService {
       pstm.setString(8, bean.getEmail());
       pstm.setString(9, bean.getCodigo());
       int filas = pstm.executeUpdate();
-      if(filas == 0){
+      if (filas == 0) {
         throw new Exception("Datos incorrectos.");
       }
       // Confirmar Tx
@@ -157,8 +157,8 @@ public class ClienteService {
       PreparedStatement pstm = cn.prepareStatement(sql);
       int filas = pstm.executeUpdate();
       pstm.close();
-      if( filas == 0){
-        throw  new RuntimeException("contador no existe.");
+      if (filas == 0) {
+        throw new RuntimeException("contador no existe.");
       }
       // Paso 2: Recuperar contador
       sql = "select int_contitem,int_contlongitud "
@@ -166,7 +166,7 @@ public class ClienteService {
               + "where vch_conttabla='Cliente'";
       pstm = cn.prepareStatement(sql);
       ResultSet rs = pstm.executeQuery();
-      if(!rs.next()){
+      if (!rs.next()) {
         throw new RuntimeException("No se puede recuperar el contador.");
       }
       int cont = rs.getInt("int_contitem");
@@ -203,7 +203,7 @@ public class ClienteService {
       String texto = "Error en el proceso crear empleado. ";
       texto += e.getMessage();
       throw new RuntimeException(texto);
-    } finally{
+    } finally {
       try {
         cn.close();
       } catch (Exception e) {
@@ -211,4 +211,68 @@ public class ClienteService {
     }
   }
 
+  public void eliminar(String codigo) {
+    Connection cn = null;
+    String query;
+    PreparedStatement pstm;
+    ResultSet rs;
+    int cont;
+    try {
+      cn = AccesoDB.getConnection();
+      cn.setAutoCommit(false);
+      // Verificar si cliente existe
+      query = "select count(1) cont from cliente where chr_cliecodigo = ?";
+      pstm = cn.prepareStatement(query);
+      pstm.setString(1, codigo);
+      rs = pstm.executeQuery();
+      rs.next();
+      cont = rs.getInt("cont");
+      rs.close();
+      pstm.close();
+      if (cont == 0) {
+        throw new SQLException("El codigo de cliente no existe");
+      }
+      // Verificar si el cliente tiene cuentas
+      query = "select count(*) cont from cuenta where chr_cliecodigo = ?";
+      pstm = cn.prepareStatement(query);
+      pstm.setString(1, codigo);
+      rs = pstm.executeQuery();
+      rs.next();
+      cont = rs.getInt("cont");
+      rs.close();
+      pstm.close();
+      if (cont > 0) {
+        throw new SQLException("El cliente tiene cuentas, no se puede eliminar.");
+      }
+      // Eliminar el cliente
+      query = "delete from cliente where chr_cliecodigo=?";
+      pstm = cn.prepareStatement(query);
+      pstm.setString(1, codigo);
+      int filas = pstm.executeUpdate();
+      pstm.close();
+      if (filas == 0) {
+        throw new SQLException("Código de cliente no existe, "
+                + "posiblemente fue eliminado por otro usuario.");
+      }
+      // Confirmar Tx
+      cn.commit();
+    } catch (SQLException e) {
+      try {
+        cn.rollback();
+      } catch (Exception e1) {
+      }
+      throw new RuntimeException(e.getMessage());
+    } catch (Exception e) {
+      try {
+        cn.rollback();
+      } catch (Exception e1) {
+      }
+      throw new RuntimeException("Error al tratar de eliminar el cliente.");
+    } finally {
+      try {
+        cn.close();
+      } catch (Exception e) {
+      }
+    }
+  }
 }
