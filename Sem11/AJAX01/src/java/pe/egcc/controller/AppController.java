@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AppController", urlPatterns = {"/AppController"})
+@WebServlet(name = "AppController", 
+        urlPatterns = {"/AppController"})
 public class AppController extends HttpServlet {
 
   @Override
