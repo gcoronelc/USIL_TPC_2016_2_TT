@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <center><h1>PROMEDIO DE NOTAS DE</h1>
+     <h1>UN ESTUDIANTE</h1></center>
+    
+    <form id="form1">
+        
+      <fieldset style="display: inline-block; width: 400px">
+      <label>PRACTICA1:</label>
+      <input type="text" name="prac1"/><br/>
+      <label>PRACTICA2:</label>
+      <input type="text" name="prac2"/><br/>
+      <label>PRACTICA3:</label>
+      <input type="text" name="prac3"/></br>
+      </fieldset>
+        
+      <fieldset style="display: inline-block; width: 400px">
+      <label>TRABAJO1:</label>
+      <input type="text" name="tra1"/><br/>
+      <label>TRABAJO2:</label>
+      <input type="text" name="tra2"/><br/>
+      <label>TRABAJO3:</label>
+      <input type="text" name="tra3"/><br/>
+      </fieldset>
+      
+      <fieldset style="display: inline-block; width: 400px">
+      <label>PARCIAL</label>
+      <input type="text" name="parcial"/><br/>
+      <label>FINAL:</label>
+      <input type="text" name="final"/><br/>
+      </fieldset>
+      
+      <input type="button" id="btnProcesar" value="Procesar"/>
+    </form>
+    <div>
+      <p>Promedio practicas: <samp id="_pp"></samp></p>
+      <p>Promedio trabajos <samp id="_pt"></samp></p>
+      <p>Promedio final: <samp id="_pf"></samp></p>
+      <p>Condición: <samp id="_co"></samp></p>
+    </div>
+    <script src="jquery/jquery-3.1.1.js"></script>
+    <script>
+      
+      $("#btnProcesar").click(function(){
+        var data = $("#form1").serialize();
+        $.post("AppController",data,function(obj){
+          $("#_pp").text(obj.promPract);
+          $("#_pt").text(obj.promTrab);
+          $("#_pf").text(obj.promFinal);
+          $("#_co").text(obj.condicion);
+        });
+      });
+      
+    </script>
+    </body>
+</html>
