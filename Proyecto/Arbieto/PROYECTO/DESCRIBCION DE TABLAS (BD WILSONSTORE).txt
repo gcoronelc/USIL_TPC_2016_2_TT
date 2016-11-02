@@ -1,0 +1,121 @@
+--------VISUALIZACION DE TABLAS (Describcion)----------------------
+
+===============================================================
+MariaDB [VENTAS_WilsonStore]> describe usuario;
++--------------------+---------+------+-----+---------+-------+
+| Field              | Type    | Null | Key | Default | Extra |
++--------------------+---------+------+-----+---------+-------+
+| ID_Usuario         | char(5) | NO   | PRI | NULL    |       |
+| hora_Ingreso       | time    | NO   |     | NULL    |       |
+| hora_salida        | time    | NO   |     | NULL    |       |
+| totHoraPermanecida | float   | NO   |     | NULL    |       |
+| fecha              | date    | NO   |     | NULL    |       |
+| ID_Administrador   | char(5) | NO   | MUL | NULL    |       |
+| ID_recepcionista   | char(5) | NO   | MUL | NULL    |       |
++--------------------+---------+------+-----+---------+-------+
+
+================================================================
+MariaDB [VENTAS_WilsonStore]> describe recepcionista;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| ID_recepcionista | char(5)     | NO   | PRI | NULL    |       |
+| Nombre           | varchar(20) | NO   |     | NULL    |       |
+| Apellido         | varchar(20) | NO   |     | NULL    |       |
+| DNI              | varchar(8)  | NO   |     | NULL    |       |
+| telefono         | varchar(9)  | NO   |     | NULL    |       |
+| correo           | varchar(30) | NO   |     | NULL    |       |
+| clave            | varchar(30) | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+=================================================================
+MariaDB [VENTAS_WilsonStore]> describe administrador;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| ID_Administrador | char(5)     | NO   | PRI | NULL    |       |
+| Nombre           | varchar(20) | NO   |     | NULL    |       |
+| Apellido         | varchar(20) | NO   |     | NULL    |       |
+| DNI              | varchar(8)  | NO   |     | NULL    |       |
+| telefono         | varchar(9)  | NO   |     | NULL    |       |
+| correo           | varchar(30) | NO   |     | NULL    |       |
+| clave            | varchar(30) | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+=================================================================
+MariaDB [VENTAS_WilsonStore]> describe cliente;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ID_Cliente | char(5)     | NO   | PRI | NULL    |       |
+| Nombre     | varchar(20) | NO   |     | NULL    |       |
+| Apellido   | varchar(20) | NO   |     | NULL    |       |
+| DNI        | varchar(8)  | NO   |     | NULL    |       |
+| telefono   | varchar(9)  | NO   |     | NULL    |       |
+| correo     | varchar(30) | NO   |     | NULL    |       |
+| direccion  | varchar(30) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+=================================================================
+MariaDB [VENTAS_WilsonStore]> describe articulo;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| ID_Articulo  | char(5)      | NO   | PRI | NULL    |       |
+| Nombre       | varchar(20)  | NO   |     | NULL    |       |
+| Precio       | decimal(8,2) | NO   |     | NULL    |       |
+| Stock        | int(11)      | YES  |     | NULL    |       |
+| ID_Categoria | char(5)      | NO   | MUL | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+
+==================================================================
+MariaDB [VENTAS_WilsonStore]> describe categoria;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| ID_Categoria | char(5)     | NO   | PRI | NULL    |       |
+| nombre       | varchar(50) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+=================================================================
+MariaDB [VENTAS_WilsonStore]> describe Bono_Descuento;
++---------------------+-------------+------+-----+---------+-------+
+| Field               | Type        | Null | Key | Default | Extra |
++---------------------+-------------+------+-----+---------+-------+
+| ID_Bono             | char(5)     | NO   | PRI | NULL    |       |
+| Motivo              | varchar(50) | NO   |     | NULL    |       |
+| PorcentajeDescuento | varchar(15) | NO   |     | NULL    |       |
++---------------------+-------------+------+-----+---------+-------+
+
+====================================================================
+MariaDB [VENTAS_WilsonStore]> describe venta;
++------------------+---------+------+-----+---------+-------+
+| Field            | Type    | Null | Key | Default | Extra |
++------------------+---------+------+-----+---------+-------+
+| ID_Venta         | char(5) | NO   | PRI | NULL    |       |
+| fecha            | date    | NO   |     | NULL    |       |
+| ID_Cliente       | char(5) | NO   | MUL | NULL    |       |
+| ID_recepcionista | char(5) | NO   | MUL | NULL    |       |
+| ID_Detalle       | char(5) | NO   | MUL | NULL    |       |
+| ID_Pago          | char(5) | NO   | MUL | NULL    |       |
++------------------+---------+------+-----+---------+-------+
+
+=====================================================================
+MariaDB [VENTAS_WilsonStore]> describe pago;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| ID_Pago     | char(5)     | NO   | PRI | NULL    |       |
+| detalle     | varchar(50) | NO   |     | NULL    |       |
+| observacion | varchar(50) | NO   |     | NULL    |       |
+| ID_Tipo     | char(5)     | NO   | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+======================================================================
+MariaDB [VENTAS_WilsonStore]> describe TipoPago;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ID_Tipo    | char(5)     | NO   | PRI | NULL    |       |
+| NombreTipo | varchar(20) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
