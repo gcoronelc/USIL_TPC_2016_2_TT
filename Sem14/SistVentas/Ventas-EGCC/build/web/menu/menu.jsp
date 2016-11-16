@@ -6,7 +6,7 @@
 
     <li><a href="#">Ventas</a>
       <ul>
-        <li><a href="#">Drop Down CSS Menus</a></li>
+        <li><a href="venta.jsp">Registtar Venta</a></li>
         <li><a href="#">Horizontal CSS Menus</a></li>
         <li><a href="#">Vertical CSS Menus</a></li>
         <li><a href="#">Dreamweaver Menus</a></li>

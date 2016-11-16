@@ -14,7 +14,7 @@ import pe.egcc.ventasweb.service.impl.PromocionServiceImpl;
  * @email egcc.usil@gmail.com
  */
 public class Prueba07 {
-  
+
   public static void main(String[] args) {
     Venta venta = new Venta();
     venta.setCliente("Gustavo");
@@ -24,19 +24,16 @@ public class Prueba07 {
     System.out.println("Importe: " + venta.getImporte());
     System.out.println("Impuesto: " + venta.getImpuesto());
     System.out.println("Total: " + venta.getTotal());
-    
+
     System.out.println("ITEMS");
-    
-    for(Detalle i: venta.getItems()){
-      System.out.println(i.getIdprod() + " | " + 
-              i.getNombre() + " | " + 
-              i.getCant() + " | " + 
-              i.getPreventa() + " | " + 
-              i.getSubtotal());
+
+    for (Detalle i : venta.getItems()) {
+      System.out.println(i.getIdprod() + " | "
+              + i.getNombre() + " | "
+              + i.getCant() + " | "
+              + i.getPreventa() + " | "
+              + i.getSubtotal());
     }
-    
-    
-    
-    
+
   }
 }
