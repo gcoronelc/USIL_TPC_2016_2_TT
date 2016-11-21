@@ -1,4 +1,4 @@
-Prácticas
+﻿Prácticas
   - 1ra: Semana 4
   - 2da:
   - 3ra:
@@ -8,7 +8,12 @@ Trabajos
   - Trabajo 2:
   - Trabajo 3:
 
-Proyecto
-    
+Evaluación Proyecto
+  - Informe (Grupal)                 -  Peso 2
+  - Aplicación (Grupal)              -  Peso 3
+  - Presentación (individual)        -  Peso 2
+  - Exposición (Individual)          -  Peso 3
+  - Respuesta preguntas (Individual) -  Peso 2
+
   
   
