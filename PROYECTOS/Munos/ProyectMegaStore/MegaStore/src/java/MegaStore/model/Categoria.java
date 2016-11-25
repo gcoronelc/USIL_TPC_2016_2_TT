@@ -1,0 +1,11 @@
+package MegaStore.model;
+
+/**
+ *
+ * @author Eric Gustavo Coronel Castillo
+ * @blog www.desarrollasoftware.com
+ * @email egcc.usil@gmail.com
+ */
+public class Categoria {
+  
+}

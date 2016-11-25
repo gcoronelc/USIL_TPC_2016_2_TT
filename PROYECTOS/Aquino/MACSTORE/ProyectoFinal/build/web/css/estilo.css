@@ -1,0 +1,69 @@
+html{
+  font-family: verdana;
+  font-size: 12px;
+}
+
+body{
+  background-color:  #98FB98;
+  color:  #98FB98;
+  font-family: Arial;
+  font-size: 18px;
+}
+.page{
+   width: 1000px;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #F08080;
+  color: #F08080;
+}
+.header{
+  width: 900px;
+  margin: 20px;
+  padding:15px;
+  background-color: white;
+  color: #F08080; 
+}
+.menu{
+     width: 900px;
+  margin: 10px;
+  padding: 5px;
+  background-color:#F08080;
+  color: #F08080;  
+  text-align: center;
+}
+.contenido{
+   width: 900px;
+  margin: 10px;
+  padding: 5px;
+  background-color:#FFFACD;
+  color:#4682B4;
+}
+.pie{
+  width: 900px;
+  margin: 10px;
+  padding: 5px;
+  background-color: #FA8072;
+  color: #FFDAB9;
+}
+
+.table {     
+    font-family: "Lucida Sans Unicode", "Arial black", Sans-Serif;
+    margin: 45px;     
+    width: 800px; 
+    text-align: left;    
+    border-collapse: collapse; 
+    font-size: 15px;     
+    text-align: center;
+    font-weight: normal;     
+    padding: 8px;     
+    background: gray;
+    border-top: 4px solid red;    
+    border-bottom: 1px solid yellowgreen; 
+    color: #039; 
+    padding: 8px;    
+    background: gray;     
+    border-bottom: 1px solid #fff;
+    color: #669;   
+    border-top: 1px solid transparent; 
+    background: gray; 
+    color: blue; }
